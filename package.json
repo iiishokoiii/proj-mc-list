@@ -1,0 +1,45 @@
+{
+  "name": "proj-mc-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "-": "0.0.1",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "D": "^1.0.0",
+    "autoprefixer": "^10.3.1",
+    "browser-sync": "^2.27.4",
+    "browserslist": "^4.16.6",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-uglify": "^3.0.2",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^9.0.0",
+    "postcss": "^8.3.5"
+  },
+  "browserslist": [
+    "last 2 version",
+    "IE >= 10",
+    "> 1% in JP",
+    "not dead"
+  ],
+  "devDependencies": {
+    "del": "^6.0.0"
+  },
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "author": "",
+  "license": "ISC"
+}
