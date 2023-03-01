@@ -54,12 +54,17 @@ const paths = {
     src: "./src/img/**/*.{jpg,jpeg,png,gif,svg}",
     dist: "./dist/img/",
   },
+  other: {
+    src: "./src/**/*.pdf",
+    dist: "./dist/",
+  },
 };
 
 // init
 const initialize = () => {
   return del([
     paths.html.dist,
+    paths.other.dist,
     paths.scripts.dist,
     paths.images.dist
   ]);
@@ -74,18 +79,9 @@ const htmlFormat = () => {
         errorHandler: notify.onError("Error: <%= error.message %>"),
       })
     )
-    // .pipe(
-    //   htmlMin({
-    //     //HTMLの圧縮
-    //     removeComments: true, //コメントを削除
-    //     collapseWhitespace: true, //余白を詰める
-    //     preserveLineBreaks: true, //タグ間の改行を詰める
-    //     removeEmptyAttributes: false //空属性を削除しない
-    //   })
-    // )
     .pipe(dest(paths.html.dist));
 };
- 
+
 // Sassコンパイル
 const sassCompile = () => {
   return src(paths.styles.src, {
@@ -195,6 +191,18 @@ const imagesCompress = () => {
     .pipe(dest(paths.images.dist));
 };
 
+// その他asset
+const otherCopy = () => {
+  return src(paths.other.src)
+    .pipe(
+      plumber({
+        //エラーがあっても処理を止めない
+        errorHandler: notify.onError("Error: <%= error.message %>"),
+      })
+    )
+    .pipe(dest(paths.other.dist));
+};
+
 // ローカルサーバー起動(dist)
 const browserSyncFunc = (done) => {
   browserSync.init({
@@ -226,11 +234,11 @@ const watchFiles = () => {
 // npx gulp実行処理
 exports.default = series(
   initialize,
-  parallel(htmlFormat, sassCompile, jsBabel, imagesCompress),
+  parallel(htmlFormat, sassCompile, jsBabel, imagesCompress, otherCopy),
   parallel(watchFiles, browserSyncFunc)
 );
 
 exports.build = series(
   initialize,
-  parallel(htmlFormat, sassCompile, jsBabel, imagesCompress),
+  parallel(htmlFormat, sassCompile, jsBabel, imagesCompress, otherCopy),
 );
